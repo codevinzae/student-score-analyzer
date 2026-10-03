@@ -10,6 +10,14 @@ package dcit50_lab2_scoreanalyzer_tiña;
  */
 public class GUI extends javax.swing.JFrame {
     
+    double[] scores = new double[4];
+
+    double[][] classScores = {
+        {85, 90, 88, 92},
+        {78, 84, 90, 86},
+        {92, 95, 89, 94}
+    };
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GUI.class.getName());
 
     /**
@@ -18,6 +26,65 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
     }
+    
+    public double calculateTotal(double[] scores) {
+
+    double total = 0;
+
+    for (int i = 0; i < scores.length; i++) {
+        total += scores[i];
+    }
+
+    return total;
+}
+
+public double calculateAverage(double[] scores) {
+
+    double total = calculateTotal(scores);
+
+    double average = total / scores.length;
+
+    return average;
+}
+
+public double findHighest(double[] scores) {
+
+    double highest = scores[0];
+
+    for (int i = 1; i < scores.length; i++) {
+
+        if (scores[i] > highest) {
+            highest = scores[i];
+        }
+
+    }
+
+    return highest;
+}
+
+public double findLowest(double[] scores) {
+
+    double lowest = scores[0];
+
+    for (int i = 1; i < scores.length; i++) {
+
+        if (scores[i] < lowest) {
+            lowest = scores[i];
+        }
+
+    }
+
+    return lowest;
+}
+
+public double calculateAverage(
+        double score1,
+        double score2,
+        double score3,
+        double score4) {
+
+    return (score1 + score2 + score3 + score4) / 4;
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,20 +108,25 @@ public class GUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtStudent = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         txtMath = new javax.swing.JTextField();
         txtDatabase = new javax.swing.JTextField();
-        txtJava1 = new javax.swing.JTextField();
-        txtNetworking1 = new javax.swing.JTextField();
+        txtJava = new javax.swing.JTextField();
+        txtNetworking = new javax.swing.JTextField();
         btnCalculate = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        lblResult = new javax.swing.JLabel();
+        lblResultText = new javax.swing.JLabel();
+        lblAverageText = new javax.swing.JLabel();
+        lblHighestText = new javax.swing.JLabel();
+        lblLowestText = new javax.swing.JLabel();
+        lblTotalText = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        lblTotal = new javax.swing.JLabel();
         lblAverage = new javax.swing.JLabel();
         lblHighest = new javax.swing.JLabel();
         lblLowest = new javax.swing.JLabel();
-        lblTotal1 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        lblResult = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -126,43 +198,43 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel4.setText("Database: ");
+        jLabel4.setText("Database: (0-100) ");
 
         jLabel6.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel6.setText("Math: ");
+        jLabel6.setText("Math: (0-100)");
 
         jLabel7.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel7.setText("Networking: ");
+        jLabel7.setText("Networking: (0-100)");
 
         jLabel8.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel8.setText("Java:");
+        jLabel8.setText("Java: (0-100)");
 
-        txtStudent.setBackground(new java.awt.Color(0, 0, 0));
-        txtStudent.setForeground(new java.awt.Color(255, 255, 255));
-        txtStudent.setText("Enter student full name");
+        txtName.setBackground(new java.awt.Color(0, 0, 0));
+        txtName.setForeground(new java.awt.Color(255, 255, 255));
+        txtName.setText("Enter student full name");
 
         txtMath.setBackground(new java.awt.Color(0, 0, 0));
         txtMath.setForeground(new java.awt.Color(255, 255, 255));
-        txtMath.setText("Math Score");
+        txtMath.setText("0");
         txtMath.addActionListener(this::txtMathActionPerformed);
 
         txtDatabase.setBackground(new java.awt.Color(0, 0, 0));
         txtDatabase.setForeground(new java.awt.Color(255, 255, 255));
-        txtDatabase.setText("Database Score");
+        txtDatabase.setText("0");
 
-        txtJava1.setBackground(new java.awt.Color(0, 0, 0));
-        txtJava1.setForeground(new java.awt.Color(255, 255, 255));
-        txtJava1.setText("Java Score");
-        txtJava1.addActionListener(this::txtJava1ActionPerformed);
+        txtJava.setBackground(new java.awt.Color(0, 0, 0));
+        txtJava.setForeground(new java.awt.Color(255, 255, 255));
+        txtJava.setText("0");
+        txtJava.addActionListener(this::txtJavaActionPerformed);
 
-        txtNetworking1.setBackground(new java.awt.Color(0, 0, 0));
-        txtNetworking1.setForeground(new java.awt.Color(255, 255, 255));
-        txtNetworking1.setText("Networking Score");
-        txtNetworking1.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
-        txtNetworking1.addActionListener(this::txtNetworking1ActionPerformed);
+        txtNetworking.setBackground(new java.awt.Color(0, 0, 0));
+        txtNetworking.setForeground(new java.awt.Color(255, 255, 255));
+        txtNetworking.setText("0");
+        txtNetworking.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        txtNetworking.addActionListener(this::txtNetworkingActionPerformed);
 
         btnCalculate.setBackground(new java.awt.Color(0, 51, 204));
         btnCalculate.setFont(new java.awt.Font("Lucida Fax", 1, 18)); // NOI18N
@@ -172,31 +244,32 @@ public class GUI extends javax.swing.JFrame {
         btnClear.setBackground(new java.awt.Color(102, 102, 102));
         btnClear.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
         btnClear.setText("CLEAR");
+        btnClear.addActionListener(this::btnClearActionPerformed);
 
         jPanel4.setBackground(new java.awt.Color(0, 0, 102));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PERFORMANCE REPORT", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Fax", 1, 18), new java.awt.Color(0, 102, 255))); // NOI18N
         jPanel4.setForeground(new java.awt.Color(0, 0, 102));
         jPanel4.setPreferredSize(new java.awt.Dimension(511, 2));
 
-        lblResult.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
-        lblResult.setForeground(new java.awt.Color(153, 255, 255));
-        lblResult.setText("RESULT: ");
+        lblResultText.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
+        lblResultText.setForeground(new java.awt.Color(153, 255, 255));
+        lblResultText.setText("RESULT: ");
 
-        lblAverage.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
-        lblAverage.setForeground(new java.awt.Color(153, 255, 255));
-        lblAverage.setText("Average: ");
+        lblAverageText.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
+        lblAverageText.setForeground(new java.awt.Color(153, 255, 255));
+        lblAverageText.setText("Average: ");
 
-        lblHighest.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
-        lblHighest.setForeground(new java.awt.Color(153, 255, 255));
-        lblHighest.setText("Highest Score: ");
+        lblHighestText.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
+        lblHighestText.setForeground(new java.awt.Color(153, 255, 255));
+        lblHighestText.setText("Highest Score: ");
 
-        lblLowest.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
-        lblLowest.setForeground(new java.awt.Color(153, 255, 255));
-        lblLowest.setText("Lowest Score: ");
+        lblLowestText.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
+        lblLowestText.setForeground(new java.awt.Color(153, 255, 255));
+        lblLowestText.setText("Lowest Score: ");
 
-        lblTotal1.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
-        lblTotal1.setForeground(new java.awt.Color(153, 255, 255));
-        lblTotal1.setText("TOTAL SCORE: ");
+        lblTotalText.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
+        lblTotalText.setForeground(new java.awt.Color(153, 255, 255));
+        lblTotalText.setText("TOTAL SCORE: ");
 
         jPanel5.setBackground(new java.awt.Color(0, 204, 255));
         jPanel5.setPreferredSize(new java.awt.Dimension(454, 2));
@@ -212,6 +285,26 @@ public class GUI extends javax.swing.JFrame {
             .addGap(0, 2, Short.MAX_VALUE)
         );
 
+        lblTotal.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(102, 255, 255));
+        lblTotal.setText("0");
+
+        lblAverage.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
+        lblAverage.setForeground(new java.awt.Color(102, 255, 255));
+        lblAverage.setText("0");
+
+        lblHighest.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
+        lblHighest.setForeground(new java.awt.Color(102, 255, 255));
+        lblHighest.setText("0");
+
+        lblLowest.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
+        lblLowest.setForeground(new java.awt.Color(102, 255, 255));
+        lblLowest.setText("0");
+
+        lblResult.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
+        lblResult.setForeground(new java.awt.Color(102, 255, 255));
+        lblResult.setText("---");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -221,34 +314,58 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblHighest, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblLowest, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAverage, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(lblLowestText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblLowest, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(lblHighestText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblHighest, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(lblAverageText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblAverage, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(lblResult, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(lblResultText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblResult, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(lblTotalText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(lblTotal1)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTotalText)
+                    .addComponent(lblTotal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblAverage)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAverageText)
+                    .addComponent(lblAverage))
                 .addGap(18, 18, 18)
-                .addComponent(lblHighest)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHighestText)
+                    .addComponent(lblHighest))
                 .addGap(18, 18, 18)
-                .addComponent(lblLowest)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLowestText)
+                    .addComponent(lblLowest))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblResult)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblResultText)
+                    .addComponent(lblResult))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -268,23 +385,22 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(btnClear))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7)
-                                    .addComponent(txtJava1)
-                                    .addComponent(txtNetworking1, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+                                    .addComponent(txtJava, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                                    .addComponent(txtNetworking)
+                                    .addComponent(jLabel8))
+                                .addGap(8, 8, 8)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(22, 22, 22)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel6)
-                                            .addComponent(txtMath)
                                             .addComponent(jLabel4)
-                                            .addComponent(txtDatabase, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)))))))
+                                            .addComponent(txtDatabase, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                                            .addComponent(txtMath)))))))
                     .addComponent(jLabel2)
-                    .addComponent(txtStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
@@ -297,15 +413,15 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtJava1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtDatabase)
+                    .addComponent(txtJava))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -314,12 +430,10 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNetworking1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)))
+                            .addComponent(txtNetworking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel5))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCalculate, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -337,7 +451,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,17 +487,66 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMathActionPerformed
 
-    private void txtJava1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJava1ActionPerformed
+    private void txtJavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJavaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtJava1ActionPerformed
+    }//GEN-LAST:event_txtJavaActionPerformed
 
-    private void txtNetworking1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNetworking1ActionPerformed
+    private void txtNetworkingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNetworkingActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNetworking1ActionPerformed
+    }//GEN-LAST:event_txtNetworkingActionPerformed
 
     private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
         // TODO add your handling code here:
+       String name = txtName.getText();
+
+double javaScore =
+        Double.parseDouble(txtJava.getText());
+
+double databaseScore =
+        Double.parseDouble(txtDatabase.getText());
+
+double networkingScore =
+        Double.parseDouble(txtNetworking.getText());
+
+double mathScore =
+        Double.parseDouble(txtMath.getText());
+
+scores[0] = javaScore;
+scores[1] = databaseScore;
+scores[2] = networkingScore;
+scores[3] = mathScore;
+
+double total = calculateTotal(scores);
+double average = calculateAverage(scores);
+double highest = findHighest(scores);
+double lowest = findLowest(scores);
+
+lblTotal.setText(String.valueOf(total));
+lblAverage.setText(String.format("%.2f", average));
+lblHighest.setText(String.valueOf(highest));
+lblLowest.setText(String.valueOf(lowest));
+
+if (average >= 75) {
+    lblResult.setText("PASSED");
+} else {
+    lblResult.setText("FAILED");
+}
     }//GEN-LAST:event_btnCalculateActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        txtName.setText("");
+txtJava.setText("");
+txtDatabase.setText("");
+txtNetworking.setText("");
+txtMath.setText("");
+
+lblTotal.setText("0");
+lblAverage.setText("0");
+lblHighest.setText("0");
+lblLowest.setText("0");
+lblResult.setText("---");
+    }//GEN-LAST:event_btnClearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -428,15 +591,20 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblAverage;
+    private javax.swing.JLabel lblAverageText;
     private javax.swing.JLabel lblHighest;
+    private javax.swing.JLabel lblHighestText;
     private javax.swing.JLabel lblLowest;
+    private javax.swing.JLabel lblLowestText;
     private javax.swing.JLabel lblResult;
-    private javax.swing.JLabel lblTotal1;
+    private javax.swing.JLabel lblResultText;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JLabel lblTotalText;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JTextField txtDatabase;
-    private javax.swing.JTextField txtJava1;
+    private javax.swing.JTextField txtJava;
     private javax.swing.JTextField txtMath;
-    private javax.swing.JTextField txtNetworking1;
-    private javax.swing.JTextField txtStudent;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtNetworking;
     // End of variables declaration//GEN-END:variables
 }
